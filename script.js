@@ -175,8 +175,9 @@ exportPdfBtn.addEventListener('click', () => {
     const element = document.querySelector('.container');
     const buttonGroup = document.querySelector('.button-group');
 
-    // 버튼 숨기기
+    // 버튼과 알림 숨기기
     buttonGroup.style.display = 'none';
+    notification.style.display = 'none';
 
     showNotification('PDF 생성 중...');
 
@@ -242,6 +243,7 @@ exportPdfBtn.addEventListener('click', () => {
             el.style.cssText = originalStyles[index];
         });
         buttonGroup.style.display = 'flex';
+        notification.style.display = 'block';
         showNotification('PDF가 생성되었습니다!');
     }).catch(err => {
         // 원래 스타일로 복원
@@ -249,6 +251,7 @@ exportPdfBtn.addEventListener('click', () => {
             el.style.cssText = originalStyles[index];
         });
         buttonGroup.style.display = 'flex';
+        notification.style.display = 'block';
         showNotification('PDF 생성 중 오류가 발생했습니다.');
         console.error(err);
     });
