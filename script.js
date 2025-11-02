@@ -124,6 +124,9 @@ resetBtn.addEventListener('click', () => {
         document.getElementById('coachGuideText').style.display = 'block';
 
         showNotification('모든 내용이 초기화되었습니다.');
+
+        // 버튼 포커스 제거 (모바일에서 버튼 색상 유지 방지)
+        resetBtn.blur();
     }
 });
 
