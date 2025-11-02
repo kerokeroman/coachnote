@@ -127,6 +127,17 @@ resetBtn.addEventListener('click', () => {
 
         // 버튼 포커스 제거 (모바일에서 버튼 색상 유지 방지)
         resetBtn.blur();
+
+        // 모바일에서 active 상태 강제 제거
+        resetBtn.classList.remove('active');
+
+        // 추가적인 강제 리플로우로 모바일 브라우저의 active 상태 초기화
+        setTimeout(() => {
+            resetBtn.style.pointerEvents = 'none';
+            setTimeout(() => {
+                resetBtn.style.pointerEvents = 'auto';
+            }, 50);
+        }, 0);
     }
 });
 
