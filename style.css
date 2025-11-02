@@ -119,6 +119,7 @@ h1 {
     background-color: white;
     color: #ff4800;
     border: 1px solid #ff4800;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-danger:hover {
@@ -127,12 +128,27 @@ h1 {
     border-color: #ff4800;
 }
 
-.btn-danger:active,
+.btn-danger:active {
+    background-color: white;
+    color: #ff4800;
+    border-color: #ff4800;
+    outline: none;
+}
+
 .btn-danger:focus {
     background-color: white;
     color: #ff4800;
     border-color: #ff4800;
     outline: none;
+}
+
+/* 모바일에서 active 상태 초기화 */
+@media (hover: none) and (pointer: coarse) {
+    .btn-danger:not(:hover) {
+        background-color: white;
+        color: #ff4800;
+        border-color: #ff4800;
+    }
 }
 
 .note-section {
@@ -385,6 +401,15 @@ h1 {
         min-width: calc(50% - 4px);
         padding: 10px 12px;
         font-size: 13px;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .btn:active {
+        background-color: inherit;
+        color: inherit;
+        border-color: inherit;
     }
 
     .section h2 {

@@ -125,19 +125,17 @@ resetBtn.addEventListener('click', () => {
 
         showNotification('모든 내용이 초기화되었습니다.');
 
-        // 버튼 포커스 제거 (모바일에서 버튼 색상 유지 방지)
+        // 버튼 상태 초기화
         resetBtn.blur();
-
-        // 모바일에서 active 상태 강제 제거
         resetBtn.classList.remove('active');
 
-        // 추가적인 강제 리플로우로 모바일 브라우저의 active 상태 초기화
-        setTimeout(() => {
-            resetBtn.style.pointerEvents = 'none';
-            setTimeout(() => {
-                resetBtn.style.pointerEvents = 'auto';
-            }, 50);
-        }, 0);
+        // 모바일에서 :active 상태 제거를 위해 버튼 재마운트 시뮬레이션
+        resetBtn.style.pointerEvents = 'none';
+
+        // 브라우저 리플로우 강제 실행
+        void resetBtn.offsetHeight;
+
+        resetBtn.style.pointerEvents = 'auto';
     }
 });
 
