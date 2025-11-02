@@ -124,18 +124,6 @@ resetBtn.addEventListener('click', () => {
         document.getElementById('coachGuideText').style.display = 'block';
 
         showNotification('모든 내용이 초기화되었습니다.');
-
-        // 버튼 상태 초기화
-        resetBtn.blur();
-        resetBtn.classList.remove('active');
-
-        // 모바일에서 :active 상태 제거를 위해 버튼 재마운트 시뮬레이션
-        resetBtn.style.pointerEvents = 'none';
-
-        // 브라우저 리플로우 강제 실행
-        void resetBtn.offsetHeight;
-
-        resetBtn.style.pointerEvents = 'auto';
     }
 });
 
