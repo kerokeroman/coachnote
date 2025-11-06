@@ -52,55 +52,25 @@
                     </div>
                     <div class="table-body" id="programTable">
                         <div class="table-row">
-                            <div class="col-day"><div class="day-label">1일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">2일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">3일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">4일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">5일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">6일차</div></div>
-                            <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
-                            <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
-                            <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
-                            <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
-                        </div>
-                        <div class="table-row">
-                            <div class="col-day"><div class="day-label">7일차</div></div>
+                            <div class="col-day">
+                                <select class="day-select" data-day-index="0">
+                                    <option value="">-</option>
+                                    <option value="1일차">1일차</option>
+                                    <option value="2일차">2일차</option>
+                                    <option value="3일차">3일차</option>
+                                    <option value="4일차">4일차</option>
+                                    <option value="5일차">5일차</option>
+                                    <option value="6일차">6일차</option>
+                                    <option value="7일차">7일차</option>
+                                </select>
+                            </div>
                             <div class="col-exercise"><div class="editable" contenteditable="true" data-placeholder="운동 내용 입력"></div></div>
                             <div class="col-reps"><div class="editable" contenteditable="true" data-placeholder="횟수"></div></div>
                             <div class="col-sets"><div class="editable" contenteditable="true" data-placeholder="세트"></div></div>
                             <div class="col-purpose"><div class="editable" contenteditable="true" data-placeholder="운동의 목적이나 달성할 목표를 입력하세요"></div></div>
                         </div>
                     </div>
+                    <button id="addRowBtn" class="btn btn-add-row">+ 행 추가</button>
                 </div>
             </div>
 
