@@ -341,10 +341,12 @@ h1 {
     font-weight: 500;
 }
 
-.btn-add-row:hover {
-    background-color: #efefef;
-    border-color: #ff4800;
-    color: #ff4800;
+@media (hover: hover) and (pointer: fine) {
+    .btn-add-row:hover {
+        background-color: #efefef;
+        border-color: #ff4800;
+        color: #ff4800;
+    }
 }
 
 .notification {
@@ -572,9 +574,12 @@ h1 {
     }
 
     .btn-add-row {
-        width: 100%;
+        width: calc(100% - 24px);
         margin-top: 12px;
-        padding: 12px 16px;
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 10px 12px;
+        font-size: 13px;
     }
 
 }
