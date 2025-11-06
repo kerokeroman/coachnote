@@ -331,13 +331,27 @@ h1 {
     border-color: #ff4800;
 }
 
+.button-row {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+}
+
 .btn-add-row {
-    margin: 12px 0 16px 16px;
     background-color: #f5f5f5;
     color: #333;
     border: 1px solid #ddd;
-    padding: 10px 16px;
     width: auto;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.btn-delete-row {
+    background-color: #fff5f2;
+    color: #ff4800;
+    border: 1px solid #ff4800;
+    width: auto;
+    padding: 10px 20px;
     font-weight: 500;
 }
 
@@ -346,6 +360,12 @@ h1 {
         background-color: #efefef;
         border-color: #ff4800;
         color: #ff4800;
+    }
+
+    .btn-delete-row:hover {
+        background-color: #ff4800;
+        color: white;
+        border-color: #ff4800;
     }
 }
 
@@ -375,39 +395,95 @@ h1 {
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        font-size: 10pt !important;
         line-height: 1.4 !important;
+    }
+
+    body {
+        padding: 0 !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding: 15mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
     }
 
     .button-group {
         display: none !important;
     }
 
+    .auto-save-indicator {
+        display: none !important;
+    }
+
     h1 {
-        font-size: 16pt !important;
+        margin-bottom: 10px !important;
+    }
+
+    header {
+        margin-bottom: 15px !important;
+        padding-bottom: 10px !important;
     }
 
     .section h2 {
-        font-size: 11pt !important;
+        margin-bottom: 8px !important;
     }
 
     .editable {
-        padding: 10px 8px !important;
-        display: flex !important;
-        align-items: center !important;
-        min-height: 40px !important;
+        padding: 4px 6px !important;
+        display: block !important;
         border: none !important;
         background: none !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        min-height: auto !important;
+    }
+
+    .table-header {
+        display: grid !important;
+        grid-template-columns: 60px 1.3fr 0.5fr 0.5fr 1.6fr !important;
+        gap: 8px !important;
+        padding: 8px 10px !important;
+    }
+
+    .table-row {
+        display: grid !important;
+        grid-template-columns: 60px 1.3fr 0.5fr 0.5fr 1.6fr !important;
+        gap: 8px !important;
+        padding: 8px 10px !important;
+        page-break-inside: avoid !important;
     }
 
     .table-row .editable {
-        padding: 8px 6px !important;
-        min-height: 35px !important;
+        padding: 4px 6px !important;
     }
 
     .col-day, .col-exercise, .col-reps, .col-sets, .col-purpose {
-        display: flex !important;
-        align-items: center !important;
+        display: block !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    .day-label, .day-select {
+        display: block !important;
+        white-space: normal !important;
+    }
+
+    .coach-guide-text {
+        display: none !important;
+    }
+
+    .note-section {
+        gap: 15px !important;
+    }
+
+    .section {
+        margin-bottom: 15px !important;
+    }
+
+    .program-table {
+        border: 1px solid #ddd !important;
     }
 }
 
@@ -478,9 +554,9 @@ h1 {
 
     .col-day {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         justify-content: center;
-        padding: 12px;
+        padding: 0;
         background-color: #ff4800;
         border: none;
     }
@@ -488,12 +564,15 @@ h1 {
     .col-day .day-label {
         font-size: 13px;
         font-weight: 700;
-        padding: 0;
+        padding: 12px;
         background-color: transparent;
         color: white;
         border: none;
         width: auto;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .col-day .day-select {
@@ -512,7 +591,7 @@ h1 {
         grid-template-columns: 80px 1fr;
         gap: 0;
         border-bottom: 1px solid #f5f5f5;
-        align-items: stretch;
+        align-items: center;
     }
 
     .col-purpose {
@@ -525,12 +604,14 @@ h1 {
     .col-purpose::before {
         display: flex;
         align-items: center;
-        padding: 12px;
+        justify-content: center;
+        height: 100%;
         font-size: 13px;
         font-weight: 600;
         color: #666;
         background-color: #fafafa;
         border-right: 1px solid #f5f5f5;
+        min-height: 20px;
     }
 
     .col-exercise::before {
@@ -556,6 +637,8 @@ h1 {
         width: 100%;
         background-color: white;
         border: none;
+        display: flex;
+        align-items: center;
     }
     .coach-guide-text p {
         font-size: 12px;
@@ -573,13 +656,8 @@ h1 {
         font-size: 12px;
     }
 
-    .btn-add-row {
-        width: calc(100% - 24px);
-        margin-top: 12px;
-        margin-left: 12px;
-        margin-right: 12px;
-        padding: 10px 12px;
-        font-size: 13px;
+    .button-row {
+        padding: 10px 0;
     }
 
 }

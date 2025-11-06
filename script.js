@@ -154,6 +154,15 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 행 삭제 버튼 이벤트
+    const deleteRowBtn = document.getElementById('deleteRowBtn');
+    if (deleteRowBtn) {
+        deleteRowBtn.addEventListener('click', () => {
+            deleteTableRow();
+            autoSave();
+        });
+    }
+
     // PDF 출력 버튼
     exportPdfBtn.addEventListener('click', () => {
         // 포커스된 요소 해제
@@ -167,51 +176,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const element = document.querySelector('.container');
         const buttonGroup = document.querySelector('.button-group');
+        const autoSaveIndicator = document.querySelector('.auto-save-indicator');
 
-        // 버튼과 알림 숨기기
+        // 버튼과 알림 임시로 숨기기
+        const originalButtonDisplay = buttonGroup.style.display;
+        const originalAutoSaveDisplay = autoSaveIndicator.style.display;
+        const originalNotificationDisplay = notification.style.display;
         buttonGroup.style.display = 'none';
+        autoSaveIndicator.style.display = 'none';
         notification.style.display = 'none';
 
         showNotification('PDF 생성 중...');
-
-        // PDF 생성 전 폰트 크기 강제 변경
-        const allElements = element.querySelectorAll('*');
-        const originalStyles = [];
-
-        allElements.forEach((el, index) => {
-            originalStyles[index] = el.style.cssText;
-
-            // 폰트 크기와 라인 높이만 변경
-            el.style.fontSize = '10pt';
-            el.style.lineHeight = '1.4';
-
-            // editable 요소는 padding과 정렬 설정
-            if (el.classList.contains('editable')) {
-                el.style.padding = '10px 8px';
-                el.style.display = 'flex';
-                el.style.alignItems = 'center';
-                el.style.minHeight = '40px';
-            }
-        });
-
-        // 제목과 섹션 헤더만 다르게
-        element.querySelector('h1').style.fontSize = '16pt';
-        element.querySelectorAll('.section h2').forEach(h2 => {
-            h2.style.fontSize = '11pt';
-        });
-
-        // 테이블 셀은 더 컴팩트하게
-        element.querySelectorAll('.table-row .editable').forEach(cell => {
-            cell.style.padding = '8px 6px';
-            cell.style.minHeight = '35px';
-        });
-
-        // 테이블 행도 가운데 정렬
-        element.querySelectorAll('.col-day, .col-exercise, .col-reps, .col-sets, .col-purpose').forEach(col => {
-            col.style.display = 'flex';
-            col.style.alignItems = 'center';
-            col.style.whiteSpace = 'nowrap';
-        });
 
         // PDF 옵션 설정
         const opt = {
@@ -221,7 +196,8 @@ window.addEventListener('DOMContentLoaded', () => {
             html2canvas: {
                 scale: 2,
                 useCORS: true,
-                letterRendering: true
+                letterRendering: true,
+                logging: false
             },
             jsPDF: {
                 unit: 'mm',
@@ -232,20 +208,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // PDF 생성
         html2pdf().set(opt).from(element).save().then(() => {
-            // 원래 스타일로 복원
-            allElements.forEach((el, index) => {
-                el.style.cssText = originalStyles[index];
-            });
-            buttonGroup.style.display = 'flex';
-            notification.style.display = 'block';
+            // 원래 상태로 복원
+            buttonGroup.style.display = originalButtonDisplay;
+            autoSaveIndicator.style.display = originalAutoSaveDisplay;
+            notification.style.display = originalNotificationDisplay;
             showNotification('PDF가 생성되었습니다!');
         }).catch(err => {
-            // 원래 스타일로 복원
-            allElements.forEach((el, index) => {
-                el.style.cssText = originalStyles[index];
-            });
-            buttonGroup.style.display = 'flex';
-            notification.style.display = 'block';
+            // 원래 상태로 복원
+            buttonGroup.style.display = originalButtonDisplay;
+            autoSaveIndicator.style.display = originalAutoSaveDisplay;
+            notification.style.display = originalNotificationDisplay;
             showNotification('PDF 생성 중 오류가 발생했습니다.');
             console.error(err);
         });
@@ -398,6 +370,21 @@ function addTableRow() {
     });
 
     newRow.querySelector('.col-day .day-select').addEventListener('change', autoSave);
+}
+
+// 테이블 행 삭제 함수 (마지막 행만 삭제)
+function deleteTableRow() {
+    const programTable = document.getElementById('programTable');
+    const rows = programTable.querySelectorAll('.table-row');
+
+    // 행이 1개 이상 있을 때만 삭제
+    if (rows.length > 1) {
+        if (confirm('마지막 행을 삭제하시겠습니까?')) {
+            rows[rows.length - 1].remove();
+        }
+    } else {
+        showNotification('최소 1개 행은 유지되어야 합니다.');
+    }
 }
 
 // 초기 이벤트 리스너 추가 함수
@@ -630,10 +617,14 @@ function lockAllEditableFields() {
     saveBtn.style.display = 'none';
     editBtn.style.display = 'inline-block';
 
-    // 행 추가 버튼 숨기기
+    // 행 추가/삭제 버튼 숨기기
     const addRowBtn = document.getElementById('addRowBtn');
+    const deleteRowBtn = document.getElementById('deleteRowBtn');
     if (addRowBtn) {
         addRowBtn.style.display = 'none';
+    }
+    if (deleteRowBtn) {
+        deleteRowBtn.style.display = 'none';
     }
 
     // 코치님 한마디 안내문구 숨기기
@@ -657,10 +648,14 @@ function unlockAllEditableFields() {
     saveBtn.style.display = 'block';
     editBtn.style.display = 'none';
 
-    // 행 추가 버튼 다시 표시
+    // 행 추가/삭제 버튼 다시 표시
     const addRowBtn = document.getElementById('addRowBtn');
+    const deleteRowBtn = document.getElementById('deleteRowBtn');
     if (addRowBtn) {
         addRowBtn.style.display = 'block';
+    }
+    if (deleteRowBtn) {
+        deleteRowBtn.style.display = 'block';
     }
 
     // 자동저장 표시 다시 표시
